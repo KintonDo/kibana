@@ -25,10 +25,10 @@ export KIBANA_BASE_BRANCH="$KIBANA_PKG_BRANCH"
 KIBANA_PKG_VERSION="$(jq -r .version "$KIBANA_DIR/package.json")"
 export KIBANA_PKG_VERSION
 
-export GECKODRIVER_CDNURL="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache"
-export CHROMEDRIVER_CDNURL="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache"
-export RE2_DOWNLOAD_MIRROR="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache"
-export CYPRESS_DOWNLOAD_MIRROR="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/cypress"
+export GECKODRIVER_CDNURL="http://localhost:8081/kibana-ci-proxy-cache"
+export CHROMEDRIVER_CDNURL="http://localhost:8081/kibana-ci-proxy-cache"
+export RE2_DOWNLOAD_MIRROR="http://localhost:8081/kibana-ci-proxy-cache"
+export CYPRESS_DOWNLOAD_MIRROR="http://localhost:8081/kibana-ci-proxy-cache/cypress"
 
 export NODE_OPTIONS="--max-old-space-size=4096"
 

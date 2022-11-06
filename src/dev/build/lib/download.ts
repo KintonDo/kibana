@@ -139,7 +139,7 @@ export async function downloadToDisk({
     if (attempt < maxAttempts) {
       const sec = attempt * retryDelaySecMultiplier;
       log.info(`Retrying in ${sec} seconds`);
-      await setTimeout(sec * 1000);
+      await setTimeout(sec * 10000);
       continue;
     }
 
@@ -190,7 +190,7 @@ export async function downloadToString({
       if ((maxAttempts ?? 3) > attempt) {
         const sec = (retryDelaySecMultiplier ?? 5) * attempt;
         log.info(`Retrying in ${sec} seconds`);
-        await setTimeout(sec * 1000);
+        await setTimeout(sec * 10000);
         continue;
       }
 

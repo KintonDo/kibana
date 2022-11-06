@@ -23,9 +23,9 @@ export async function installInDir(directory: string, extraArgs: string[] = []) 
     cwd: directory,
     env: {
       SASS_BINARY_SITE:
-        'https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/node-sass',
+        'http://localhost:8081/kibana-ci-proxy-cache/node-sass',
       RE2_DOWNLOAD_MIRROR:
-        'https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/node-re2',
+        'http://localhost:8081/kibana-ci-proxy-cache/node-re2',
     },
   });
 }

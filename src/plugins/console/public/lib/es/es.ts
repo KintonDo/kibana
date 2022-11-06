@@ -24,6 +24,18 @@ export function getContentType(body: unknown) {
   return 'application/json';
 }
 
+export function _getCookie(cname: unknown)
+{
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i=0; i<ca.length; i++)
+  {
+    let c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+
 export function send(
   method: string,
   path: string,
@@ -33,13 +45,29 @@ export function send(
 ) {
   const wrappedDfd = $.Deferred();
 
+  let logicalClusterName = _getCookie('kibanaLogicalCluster');
+  let es_url = path;
+  if (es_url.startsWith('/')) {
+    es_url = es_url.substr(1);
+  }
+  es_url = '/monitor/' + logicalClusterName + ':' + es_url;
+  let uname = _getCookie('monitorUsername');
+  let password = _getCookie('monitorPassword');
+  if (uname === undefined || password === undefined || uname === '' || password === '') {
+    alert("请选择逻辑集群!");
+    return;
+  }
+
   const options: JQuery.AjaxSettings = {
     url:
       '../api/console/proxy?' +
-      stringify({ path, method, ...(withProductOrigin && { withProductOrigin }) }, { sort: false }),
+      stringify({ es_url, method, ...(withProductOrigin && { withProductOrigin }) }, { sort: false }),
     headers: {
       'kbn-xsrf': 'kibana',
       ...(asSystemRequest && { 'kbn-system-request': 'true' }),
+    },
+    beforeSend:function(xhr){
+      xhr.setRequestHeader('Authorization', "Basic " + btoa(uname + ":" + password));
     },
     data,
     contentType: getContentType(data),

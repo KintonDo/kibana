@@ -75,7 +75,7 @@ elif [[ "$UNAME" == "Darwin" ]]; then
 fi
 echo " -- Running on OS: $OS"
 
-nodeUrl="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/dist/v$nodeVersion/node-v$nodeVersion-${OS}-${classifier}"
+nodeUrl="http://localhost:8081/kibana-ci-proxy-cache/dist/v$nodeVersion/node-v$nodeVersion-${OS}-${classifier}"
 
 if [[ "$installNode" == "true" ]]; then
   echo " -- node: version=v${nodeVersion} dir=$nodeDir"
@@ -127,10 +127,10 @@ yarnGlobalDir="$(yarn global bin)"
 export PATH="$PATH:$yarnGlobalDir"
 
 # use a proxy to fetch chromedriver/geckodriver asset
-export GECKODRIVER_CDNURL="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache"
-export CHROMEDRIVER_CDNURL="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache"
-export RE2_DOWNLOAD_MIRROR="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache"
-export CYPRESS_DOWNLOAD_MIRROR="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/cypress"
+export GECKODRIVER_CDNURL="http://localhost:8081/kibana-ci-proxy-cache"
+export CHROMEDRIVER_CDNURL="http://localhost:8081/kibana-ci-proxy-cache"
+export RE2_DOWNLOAD_MIRROR="http://localhost:8081/kibana-ci-proxy-cache"
+export CYPRESS_DOWNLOAD_MIRROR="http://localhost:8081/kibana-ci-proxy-cache/cypress"
 
 export CHECKS_REPORTER_ACTIVE=false
 

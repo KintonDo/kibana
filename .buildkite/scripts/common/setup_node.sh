@@ -28,7 +28,9 @@ elif [[ "$UNAME" == "Darwin" ]]; then
 fi
 echo " -- Running on OS: $OS"
 
-nodeUrl="https://us-central1-elastic-kibana-184716.cloudfunctions.net/kibana-ci-proxy-cache/dist/v$NODE_VERSION/node-v$NODE_VERSION-${OS}-${classifier}"
+#nodeUrl="http://localhost:8081/kibana-ci-proxy-cache/dist/v$NODE_VERSION/node-v$NODE_VERSION-${OS}-${classifier}"
+nodeUrl="http://localhost:8081/kibana-ci-proxy-cache/dist/v$NODE_VERSION/node-v$NODE_VERSION-${OS}-${classifier}"
+
 
 echo " -- node: version=v${NODE_VERSION} dir=$NODE_DIR"
 
