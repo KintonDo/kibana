@@ -85,6 +85,19 @@ import { getHighlightRequest } from '../../../common/field_formats';
 import { fetchSoon } from './legacy';
 import { extractReferences } from './extract_references';
 
+
+function _getCookie(cname: any)
+{
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i=0; i<ca.length; i++)
+  {
+    let c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+
 /** @internal */
 export const searchSourceRequiredUiSettings = [
   'dateFormat:tz',
@@ -318,6 +331,8 @@ export class SearchSource {
     const params = getSearchParamsFromRequest(searchRequest, {
       getConfig,
     });
+    let logicalClusterName = _getCookie('kibanaLogicalCluster');
+    params.index = logicalClusterName + '-' + params.index;
 
     return search({ params, indexType: searchRequest.indexType }, options).then(({ rawResponse }) =>
       onResponse(searchRequest, rawResponse)

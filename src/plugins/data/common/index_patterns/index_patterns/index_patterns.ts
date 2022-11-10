@@ -50,6 +50,18 @@ const indexPatternCache = createIndexPatternCache();
 const MAX_ATTEMPTS_TO_RESOLVE_CONFLICTS = 3;
 const savedObjectType = 'index-pattern';
 
+function _getCookie(cname: any)
+{
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i=0; i<ca.length; i++)
+  {
+    let c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+
 export interface IndexPatternSavedObjectAttrs {
   title: string;
 }
@@ -103,7 +115,10 @@ export class IndexPatternsService {
    * Refresh cache of index pattern ids and titles
    */
   private async refreshSavedObjectsCache() {
+    let logicalClusterName = _getCookie('kibanaLogicalCluster');
+
     this.savedObjectsCache = await this.savedObjectsClient.find<IndexPatternSavedObjectAttrs>({
+      cluster: String(logicalClusterName),
       type: 'index-pattern',
       fields: ['title'],
       perPage: 10000,

@@ -718,6 +718,7 @@ export class SavedObjectsRepository {
       typeToNamespacesMap,
       filter,
       preference,
+      cluster,
     } = options;
 
     if (!type && !typeToNamespacesMap) {
@@ -785,6 +786,7 @@ export class SavedObjectsRepository {
           searchFields,
           rootSearchFields,
           type: allowedTypes,
+          cluster: cluster,
           sortField,
           sortOrder,
           namespaces,

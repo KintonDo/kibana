@@ -70,7 +70,7 @@ function getSimpleQueryStringTypeFields(
 function getClauseForType(
   registry: ISavedObjectTypeRegistry,
   namespaces: string[] = [DEFAULT_NAMESPACE_STRING],
-  type: string
+  type: string,
 ) {
   if (namespaces.length === 0) {
     throw new Error('cannot specify empty namespaces array');
@@ -181,6 +181,7 @@ export function getQueryParams({
   registry,
   namespaces,
   type,
+  cluster,
   typeToNamespacesMap,
   search,
   searchFields,
@@ -199,7 +200,10 @@ export function getQueryParams({
       ...(kueryNode != null ? [esKuery.toElasticsearchQuery(kueryNode)] : []),
       {
         bool: {
-          must: hasReference ? [getClauseForReference(hasReference)] : undefined,
+          must: [
+            ...(hasReference ? [getClauseForReference(hasReference)] : []),
+            // ...(cluster ? [ {term: { cluster: cluster[0] } }] : []),
+          ],
           should: types.map((shouldType) => {
             const normalizedNamespaces = normalizeNamespaces(
               typeToNamespacesMap ? typeToNamespacesMap.get(shouldType) : namespaces
@@ -232,6 +236,7 @@ export function getQueryParams({
       bool.must = [simpleQueryStringClause];
     }
   }
+  console.log(`query_params:${JSON.stringify(bool)}`);
 
   return { query: { bool } };
 }

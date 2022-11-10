@@ -50,6 +50,7 @@ export function getSearchDsl(
 ) {
   const {
     type,
+    cluster,
     search,
     defaultSearchOperator,
     searchFields,
@@ -75,6 +76,7 @@ export function getSearchDsl(
       registry,
       namespaces,
       type,
+      cluster,
       typeToNamespacesMap,
       search,
       searchFields,

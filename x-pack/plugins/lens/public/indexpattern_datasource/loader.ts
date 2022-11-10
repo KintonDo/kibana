@@ -316,10 +316,25 @@ export async function changeLayerIndexPattern({
   }
 }
 
+function _getCookie(cname: any)
+{
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i=0; i<ca.length; i++)
+  {
+    let c = ca[i].trim();
+    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+  }
+  return "";
+}
+
 async function loadIndexPatternRefs(
   savedObjectsClient: SavedObjectsClient
 ): Promise<IndexPatternRef[]> {
+  let logicalClusterName = _getCookie('kibanaLogicalCluster');
+
   const result = await savedObjectsClient.find<{ title: string }>({
+    cluster: String(logicalClusterName),
     type: 'index-pattern',
     fields: ['title'],
     perPage: 10000,
