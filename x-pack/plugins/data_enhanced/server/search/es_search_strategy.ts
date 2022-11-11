@@ -92,8 +92,6 @@ export const enhancedEsSearchStrategyProvider = (
         ...request.params,
       });
 
-      logger.info(`es_search_strategy index: ${request.params.index}`);
-
       promise = esClient.asyncSearch.submit(submitOptions);
     } else {
       promise = esClient.asyncSearch.get({

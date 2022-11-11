@@ -29,7 +29,7 @@ export const registerFindRoute = (router: IRouter) => {
           per_page: schema.number({ min: 0, defaultValue: 20 }),
           page: schema.number({ min: 0, defaultValue: 1 }),
           type: schema.oneOf([schema.string(), schema.arrayOf(schema.string())]),
-          cluster: schema.oneOf([schema.string(), schema.arrayOf(schema.string())]),
+          cluster: schema.maybe(schema.string()),
           search: schema.maybe(schema.string()),
           default_search_operator: schema.oneOf([schema.literal('OR'), schema.literal('AND')], {
             defaultValue: 'OR',
@@ -57,9 +57,6 @@ export const registerFindRoute = (router: IRouter) => {
 
       const namespaces =
         typeof req.query.namespaces === 'string' ? [req.query.namespaces] : req.query.namespaces;
-
-      console.log(`_find, query`);
-      console.log(query);
 
       const result = await context.core.savedObjects.client.find({
         perPage: query.per_page,

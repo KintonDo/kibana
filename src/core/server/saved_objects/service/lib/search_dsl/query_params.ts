@@ -202,7 +202,7 @@ export function getQueryParams({
         bool: {
           must: [
             ...(hasReference ? [getClauseForReference(hasReference)] : []),
-            // ...(cluster ? [ {term: { cluster: cluster[0] } }] : []),
+            ...(cluster && cluster[0] ? [ {term: { cluster: cluster[0] } }] : []),
           ],
           should: types.map((shouldType) => {
             const normalizedNamespaces = normalizeNamespaces(
@@ -236,8 +236,7 @@ export function getQueryParams({
       bool.must = [simpleQueryStringClause];
     }
   }
-  console.log(`query_params:${JSON.stringify(bool)}`);
-
+  
   return { query: { bool } };
 }
 

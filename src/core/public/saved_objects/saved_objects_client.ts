@@ -340,8 +340,6 @@ export class SavedObjectsClient {
     const renamedQuery = renameKeys<SavedObjectsFindOptions, any>(renameMap, options);
     const query = pick.apply(null, [renamedQuery, ...Object.values<string>(renameMap)]);
 
-    console.log(`objects_client, path:${path}, query:${JSON.stringify(query)}, options:${JSON.stringify(options)}`);
-
     const request: ReturnType<SavedObjectsApi['find']> = this.savedObjectsFetch(path, {
       method: 'GET',
       query,
