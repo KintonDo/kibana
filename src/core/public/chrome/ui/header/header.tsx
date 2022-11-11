@@ -101,50 +101,6 @@ export function Header({
     <>
       <header className={className} data-test-subj="headerGlobalNav">
         <div id="globalHeaderBars">
-          {/*<EuiHeader*/}
-          {/*  theme="dark"*/}
-          {/*  position="fixed"*/}
-          {/*  sections={[*/}
-          {/*    {*/}
-          {/*      items: [*/}
-          {/*        <HeaderLogo*/}
-          {/*          href={homeHref}*/}
-          {/*          forceNavigation$={observables.forceAppSwitcherNavigation$}*/}
-          {/*          navLinks$={observables.navLinks$}*/}
-          {/*          navigateToApp={application.navigateToApp}*/}
-          {/*        />,*/}
-          {/*        <LoadingIndicator loadingCount$={observables.loadingCount$} />,*/}
-          {/*      ],*/}
-          {/*      borders: 'none',*/}
-          {/*    },*/}
-          {/*    {*/}
-          {/*      ...(observables.navControlsCenter$ && {*/}
-          {/*        items: [*/}
-          {/*          <EuiShowFor sizes={['m', 'l', 'xl']}>*/}
-          {/*            <HeaderNavControls navControls$={observables.navControlsCenter$} />*/}
-          {/*          </EuiShowFor>,*/}
-          {/*        ],*/}
-          {/*      }),*/}
-          {/*      borders: 'none',*/}
-          {/*    },*/}
-          {/*    {*/}
-          {/*      items: [*/}
-          {/*        <EuiHideFor sizes={['m', 'l', 'xl']}>*/}
-          {/*          <HeaderNavControls navControls$={observables.navControlsCenter$} />*/}
-          {/*        </EuiHideFor>,*/}
-          {/*        <HeaderHelpMenu*/}
-          {/*          helpExtension$={observables.helpExtension$}*/}
-          {/*          helpSupportUrl$={observables.helpSupportUrl$}*/}
-          {/*          kibanaDocLink={kibanaDocLink}*/}
-          {/*          kibanaVersion={kibanaVersion}*/}
-          {/*        />,*/}
-          {/*        <HeaderNavControls navControls$={observables.navControlsRight$} />,*/}
-          {/*      ],*/}
-          {/*      borders: 'none',*/}
-          {/*    },*/}
-          {/*  ]}*/}
-          {/*/>*/}
-
           <EuiHeader position="fixed">
             <EuiHeaderSection grow={false}>
               <EuiHeaderSectionItem border="right" className="header__toggleNavButtonSection">
